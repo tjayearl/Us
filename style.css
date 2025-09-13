@@ -1,0 +1,1266 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+/* Basic body reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Garamond', 'Times New Roman', serif; /* A romantic, classic font */
+    color: #333; /* Default text color to dark gray */
+    /* Enable smooth scrolling for nav links */
+    scroll-behavior: smooth;
+}
+
+/* --- NEW: Navigation Bar --- */
+.main-nav {
+    background-color: rgba(72, 61, 139, 0.9); /* Semi-transparent Dark Slate Blue */
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    transition: top 0.3s ease;
+}
+
+.main-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.main-nav a:hover {
+    border-color: #f3e5f5; /* Soft Lavender */
+}
+
+.hero-section {
+    position: relative; /* For positioning the animation container */
+    overflow: hidden; /* Hide animation overflow */
+    /* --- NEW: Using your photo as the background --- */
+    /* 1. Replace the URL with your favorite photo */
+    background-image: url('https://images.unsplash.com/photo-1515934751635-481eff048a19?q=80&w=2070');
+    /* 2. Add a dark overlay and blend it to make text readable */
+    background-size: cover; /* Ensures the image covers the whole area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat;
+    height: 100vh; /* Makes the section take up the full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff; /* White text on the dark gradient */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: multiply;
+}
+
+/* --- NEW: This creates the blurred background effect --- */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px;
+    background: inherit;
+    filter: blur(5px); /* Adjust the blur amount here */
+    z-index: -1;
+}
+
+/* --- Floating Hearts Animation --- */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hero-headline {
+    font-size: 5rem; /* Big, impactful headline */
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-family: 'Dancing Script', cursive; /* NEW: Handwritten font */
+    /* A subtle text shadow can make the text pop */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-tagline {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-style: italic;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* --- NEW: Section Dividers --- */
+.section-divider {
+    position: relative;
+    background-color: #fff; /* Matches the section below it */
+}
+
+.section-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px; /* Adjust height of the wave */
+}
+
+.section-divider .shape-fill {
+    fill: #f3e5f5; /* Soft Lavender, matches the section above it */
+}
+
+/* Flips the divider for alternating sections */
+.section-divider.flipped {
+    background-color: #f3e5f5;
+}
+.section-divider.flipped .shape-fill {
+    fill: #fff;
+}
+
+/* --- NEW: General Fade-in Animation --- */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Story Section --- */
+.story-section {
+    padding: 60px 20px;
+    background-color: #f3e5f5; /* Soft Lavender */
+    color: #333;
+    text-align: center;
+}
+
+.story-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive; /* NEW: Handwritten font */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- Timeline --- */
+.timeline {
+    position: relative;
+    /* The vertical line in the middle */
+    border-left: 2px solid #ddd;
+    margin-left: 20px; /* Adjust for icon size */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 40px; /* Space for the icon and line */
+    text-align: left;
+    /* --- NEW: Prepare for slide-in animation --- */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-icon {
+    position: absolute;
+    left: -16px; /* (Icon width / 2) + (line-width / 2) */
+    top: 0;
+    background-color: #e6e6fa; /* Lavender */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    border: 2px solid #b19cd9; /* Light Purple */
+}
+
+.timeline-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #483d8b; /* Dark Slate Blue */
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* The little triangle pointing to the timeline */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 15px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #fff;
+}
+
+/* --- Gallery Section --- */
+.gallery-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive; /* NEW: Handwritten font */
+}
+
+.photo-grid {
+    display: grid;
+    /* Creates a responsive grid that shows 1, 2, or 3 columns depending on screen width */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.photo-item {
+    overflow: hidden; /* Hides the part of the image that zooms outside the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    transition: box-shadow 0.4s ease; /* Smooth transition for the glow effect */
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the container without distortion */
+    display: block;
+    transition: transform 0.4s ease; /* Smooth transition for the zoom effect */
+}
+
+.photo-item:hover img {
+    transform: scale(1.1); /* Zooms the image in by 10% on hover */
+}
+.photo-item:hover {
+    box-shadow: 0 0 20px 5px rgba(147, 112, 219, 0.7); /* NEW: Glow effect */
+}
+
+/* --- NEW: Memory Wall Section --- */
+.memory-wall-section {
+    padding: 60px 20px;
+    background-color: #f3e5f5; /* Soft Lavender */
+    text-align: center;
+}
+
+.memory-wall-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.memory-grid {
+    column-count: 3; /* Number of columns */
+    column-gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.memory-item {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    /* NEW: Enforce a consistent aspect ratio for a cleaner look */
+    aspect-ratio: 1 / 1.2;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.memory-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+.memory-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the container without distortion */
+    display: block;
+    border-radius: 2px;
+}
+
+/* --- NEW: Memory Jar Section --- */
+.memory-jar-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.memory-jar-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.jar-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.memory-note {
+    background-color: #f9f6f3; /* Parchment color */
+    color: #6a5acd; /* Slate Blue */
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    cursor: pointer;
+    border: 1px solid #e0d7cc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    /* Hide the full text, showing only a snippet */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.memory-note:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* --- NEW: Memory Jar Modal --- */
+.memory-jar-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1003;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.memory-jar-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.memory-jar-content {
+    background-color: #fff;
+    color: #333;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+    font-family: 'Garamond', serif;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    cursor: default;
+    animation: fadeIn 0.4s ease;
+}
+
+/* --- Love Notes Section --- */
+.notes-section {
+    padding: 60px 20px;
+    background-color: #f3e5f5; /* Soft Lavender */
+    color: #333;
+    text-align: center;
+}
+
+.notes-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive; /* NEW: Handwritten font */
+}
+
+.notes-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* The main container for the flip card */
+.note-card {
+    background-color: transparent;
+    width: 300px;
+    height: 250px;
+    perspective: 1000px; /* Gives the 3D effect */
+    cursor: pointer;
+}
+
+/* This container is needed to position the front and back side */
+.note-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Flips the card on hover */
+.note-card:hover .note-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back sides */
+.note-card-front, .note-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* For Safari */
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.note-card-front {
+    background-color: #fff;
+    font-size: 1.5rem;
+}
+
+.note-card-back {
+    background-color: #9370DB; /* Medium Purple */
+    color: #fff;
+    transform: rotateY(180deg);
+    font-style: italic;
+}
+
+.note-card-back span {
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* --- NEW: Countdowns Section --- */
+.countdowns-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.countdowns-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.countdown-item {
+    background-color: #f3e5f5;
+    padding: 25px 20px;
+    border-radius: 8px;
+    position: relative; /* For confetti */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.countdown-item h3 {
+    margin: 0 0 15px 0;
+    font-family: 'Garamond', serif;
+    font-size: 1.2rem;
+    color: #483d8b;
+}
+
+.countdown-display {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #483d8b;
+}
+
+.countdown-label {
+    font-style: italic;
+    color: #666;
+}
+
+/* NEW: Live timer display */
+.countdown-display-live {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #483d8b;
+    padding: 10px 0;
+}
+.countdown-display-live span[data-unit] {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.countdown-display-live span.pop {
+    transform: scale(1.2);
+}
+
+/* NEW: Heartbeat animation */
+.heartbeat {
+    display: inline-block;
+    animation: heartbeat 1.5s infinite ease-in-out;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* NEW: Confetti animation */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #f00;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall 2s ease-out forwards;
+}
+@keyframes fall {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(150px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.countdown-display-live span {
+    margin: 0 5px;
+}
+
+/* --- Bucket List Section --- */
+.bucket-list-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+}
+
+.bucket-list-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive; /* NEW: Handwritten font */
+}
+
+.goals-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.goals-list li {
+    font-size: 1.2rem;
+    padding: 15px 15px 15px 40px; /* Add padding for the pseudo-element */
+    border-bottom: 1px solid #eee;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* The custom "checkbox" or bullet point */
+.goals-list li::before {
+    content: '☐'; /* An empty box character */
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    font-size: 1.3rem;
+    color: #ccc;
+}
+
+.goals-list li.completed {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.goals-list li.completed::before {
+    content: '☑'; /* A checked box character */
+    color: #9370DB; /* Medium Purple */
+}
+
+/* --- NEW: Future Dreams Section --- */
+.dreams-section {
+    padding: 60px 20px;
+    background-color: #f3e5f5; /* Soft Lavender */
+    color: #333;
+    text-align: center;
+}
+
+.dreams-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.dreams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.dream-category {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.dream-category h3 {
+    font-family: 'Garamond', serif;
+    color: #483d8b;
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.dream-category ul {
+    list-style-position: inside;
+    padding-left: 0;
+    line-height: 1.8;
+}
+
+/* --- NEW: Birthday Vibes Section --- */
+.birthday-vibes-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.birthday-vibes-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.progress-bar-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #eee;
+    border-radius: 30px;
+    padding: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    height: 30px;
+    background: linear-gradient(90deg, #b388ff, #7e57c2);
+    border-radius: 25px;
+    width: 0%; /* Starts at 0 */
+    transition: width 1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.birthday-message {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #483d8b;
+    animation: heartbeat 1.5s infinite;
+}
+
+/* --- NEW: Our Lessons Section --- */
+.lessons-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+}
+
+.lessons-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.lessons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.lesson-item {
+    background-color: #f3e5f5; /* Soft Lavender */
+    padding: 20px;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #483d8b; /* Dark Slate Blue text */
+    border-left: 4px solid #9370DB; /* Medium Purple accent */
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- NEW: Promises Section --- */
+.promises-section {
+    padding: 60px 20px;
+    background-color: #483D8B; /* Dark Slate Blue background */
+    color: #fff;
+    text-align: center;
+}
+
+.promises-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.promises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.promise-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 8px;
+    font-family: 'Garamond', serif;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    transition: background-color 0.3s ease;
+}
+
+/* --- NEW: Future Letter Section --- */
+.future-letter-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+}
+
+.future-letter-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.letter-body {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #f9f6f3; /* A warm, parchment-like color */
+    padding: 30px 40px;
+    border-radius: 8px;
+    text-align: left;
+    font-family: 'Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.letter-body p {
+    margin-bottom: 1.5em;
+}
+
+.letter-body span {
+    font-style: italic;
+}
+
+/* --- NEW: "Why I Love You" Section --- */
+.reasons-section {
+    padding: 60px 20px;
+    background-color: #f3e5f5; /* Soft Lavender */
+    text-align: center;
+}
+
+.reasons-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.reasons-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto 30px auto;
+    max-width: 700px;
+}
+
+.reasons-list li {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    font-size: 1.2rem;
+    font-family: 'Garamond', serif;
+    color: #444;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- NEW: Secret Trigger Section --- */
+.secret-trigger-section {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+/* --- NEW: Password Modal --- */
+.password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1002;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.password-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.password-box {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.password-box h3 {
+    margin: 0 0 20px 0;
+    font-family: 'Garamond', serif;
+}
+
+.password-box input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.password-box button {
+    /* Reusing hug-button style */
+    composes: hug-button;
+    width: 100%;
+}
+
+.password-error {
+    color: #c0392b;
+    margin-top: 10px;
+    display: none;
+}
+.password-error.show {
+    display: block;
+}
+
+/* --- NEW: Journal Trigger Section --- */
+.journal-trigger-section {
+    padding: 40px 20px;
+    background-color: #f3e5f5;
+    text-align: center;
+}
+
+/* --- NEW: Journal Modal --- */
+.journal-content {
+    background-color: #fff;
+    color: #333;
+    max-width: 600px;
+    width: 90%;
+    height: 85vh;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.journal-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 0 0 15px 0;
+    color: #483d8b;
+}
+
+.journal-entries {
+    flex-grow: 1;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 5px;
+    margin-bottom: 15px;
+}
+
+.journal-entry {
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.journal-entry p {
+    margin: 0 0 5px 0;
+    white-space: pre-wrap; /* Respects line breaks */
+}
+.entry-date {
+    font-size: 0.8rem;
+    color: #999;
+    font-style: italic;
+}
+.no-entries {
+    color: #999;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.journal-content textarea {
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.journal-content button {
+    /* Reusing hug-button style */
+    composes: hug-button;
+}
+
+/* --- NEW: Letter Trigger Section --- */
+.letter-trigger-section {
+    padding: 40px 20px;
+    background-color: #f3e5f5;
+    text-align: center;
+}
+
+/* --- NEW: Letter Modal --- */
+.letter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, rgba(72, 61, 139, 0.95) 0%, rgba(147, 112, 219, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.letter-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.close-letter-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.close-letter-button:hover {
+    opacity: 1;
+}
+
+.letter-content {
+    color: #fff;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: scroll;
+    padding: 20px;
+    font-size: 1.2rem;
+    line-height: 2;
+    text-align: center;
+    /* Hide scrollbar for a cleaner look */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.letter-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.letter-content h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+}
+
+.letter-content .promise {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+/* --- Footer --- */
+.site-footer {
+    position: relative; /* Needed for the animation container */
+    padding: 40px 20px;
+    background-color: #483D8B; /* Dark Slate Blue */
+    color: #fff;
+    text-align: center;
+}
+
+.hug-button {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-family: 'Garamond', serif;
+    font-size: 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.hug-button:hover {
+    background-color: #f3e5f5; /* Soft Lavender on hover */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.footer-text {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.easter-egg-heart {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.commitment-quote {
+    font-style: italic;
+    max-width: 600px;
+    margin: 15px auto 0 auto;
+    opacity: 0.8;
+}
+
+.dedication {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+/* --- Hug Animation --- */
+.hug-animation-container {
+    position: absolute;
+    bottom: 100%; /* Start right above the footer */
+    left: 0;
+    width: 100%;
+    height: 200px; /* Area where animation can happen */
+    pointer-events: none; /* Allows clicking through the container */
+    overflow: hidden;
+}
+
+.hug-emoji {
+    position: absolute;
+    bottom: -50px; /* Start from below the container's view */
+    font-size: 2rem;
+    animation: floatUp 3s ease-out forwards;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-250px); /* Float up by 250px */
+        opacity: 0;
+    }
+}
+
+/* --- Easter Egg Popup --- */
+.secret-message-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 120%); /* Start off-screen */
+    background-color: #fff;
+    color: #444;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 400px;
+    width: 90%;
+    text-align: left;
+    border-top: 5px solid #9370DB;
+}
+
+.secret-message-popup h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+    color: #483d8b;
+}
+
+.secret-message-popup span {
+    display: block;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+.secret-message-popup.show {
+    transform: translate(-50%, 0); /* Slide into view */
+}
+
+/* --- NEW: Love Quote Popup --- */
+.love-quote-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFD700; /* Gold accent */
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    font-size: 1.1rem;
+    font-style: italic;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+.love-quote-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -10px);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .hero-headline {
+        font-size: 3.5rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.2rem;
+    }
+
+    .main-nav {
+        padding: 5px 0;
+    }
+
+    .story-section h2,
+    .gallery-section h2,
+    .notes-section h2,
+    .bucket-list-section h2,
+    .birthday-vibes-section h2,
+    .memory-jar-section h2,
+    .countdowns-section h2,
+    .dreams-section h2,
+    .lessons-section h2,
+    .promises-section h2,
+    .future-letter-section h2, 
+    .journal-content h3,
+    .reasons-section h2,
+    .letter-content h3  {
+        font-size: 2.5rem; /* Increased size for script font readability */
+    }
+
+    .timeline {
+        margin-left: 0;
+    }
+
+    .timeline-item {
+        padding-left: 50px;
+    }
+
+    .countdown-display-live {
+        font-size: 1.5rem;
+    }
+
+    .main-nav li {
+        margin: 0 10px;
+    }
+
+    .memory-grid {
+        column-count: 2; /* Fewer columns on smaller screens */
+    }
+}
