@@ -142,9 +142,13 @@ body, html {
     transform: translateY(0);
 }
 
+/* NEW: Standardized section spacing */
+.page-section {
+    padding: 80px 20px;
+}
+
 /* --- Story Section --- */
 .story-section {
-    padding: 60px 20px;
     background-color: #f3e5f5; /* Soft Lavender */
     color: #333;
     text-align: center;
@@ -234,7 +238,6 @@ body, html {
 
 /* --- Gallery Section --- */
 .gallery-section {
-    padding: 60px 20px;
     background-color: #fff;
     color: #333;
     text-align: center;
@@ -253,11 +256,21 @@ body, html {
     gap: 15px;
 }
 
+.gallery-year {
+    grid-column: 1 / -1; /* Make the heading span all columns */
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #b19cd9;
+    margin: 20px 0 0 0;
+}
+
 .photo-item {
     overflow: hidden; /* Hides the part of the image that zooms outside the container */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     position: relative;
+    display: block; /* Make the link a block element */
     transition: box-shadow 0.4s ease; /* Smooth transition for the glow effect */
 }
 
@@ -276,9 +289,86 @@ body, html {
     box-shadow: 0 0 20px 5px rgba(147, 112, 219, 0.7); /* NEW: Glow effect */
 }
 
+/* --- NEW: Lightbox Styles --- */
+.lightbox {
+    position: fixed;
+    z-index: 1005;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+}
+.lightbox.show {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85%;
+    animation: zoomIn 0.4s;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover {
+    color: #bbb;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.lightbox-prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+.lightbox-next {
+    right: 0;
+}
+
+.lightbox-caption {
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    font-style: italic;
+    animation: zoomIn 0.4s;
+}
+
 /* --- NEW: Memory Wall Section --- */
 .memory-wall-section {
-    padding: 60px 20px;
     background-color: #f3e5f5; /* Soft Lavender */
     text-align: center;
 }
@@ -325,7 +415,6 @@ body, html {
 
 /* --- NEW: Memory Jar Section --- */
 .memory-jar-section {
-    padding: 60px 20px;
     background-color: #fff;
     text-align: center;
 }
@@ -404,7 +493,6 @@ body, html {
 
 /* --- Love Notes Section --- */
 .notes-section {
-    padding: 60px 20px;
     background-color: #f3e5f5; /* Soft Lavender */
     color: #333;
     text-align: center;
@@ -484,7 +572,6 @@ body, html {
 
 /* --- NEW: Countdowns Section --- */
 .countdowns-section {
-    padding: 60px 20px;
     background-color: #fff;
     text-align: center;
 }
@@ -579,9 +666,78 @@ body, html {
     margin: 0 5px;
 }
 
+/* --- NEW: Birthday-Specific Styles --- */
+
+/* Wifey's Birthday Style */
+#birthday-countdown-item {
+    background-color: #e6e6fa; /* Pastel Lavender */
+    border: 2px solid transparent;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #d8baff, 0 0 10px #d8baff;
+    }
+    to {
+        box-shadow: 0 0 20px #c59eff, 0 0 30px #c59eff;
+    }
+}
+
+/* Hubby's Birthday Style */
+.hubby-birthday {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Deep Purple Gradient */
+}
+
+.hubby-birthday h3,
+.hubby-birthday .countdown-display-live {
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.hubby-birthday .countdown-display-live {
+    font-weight: 700; /* Bolder font */
+}
+
+/* Fireworks Animation for Hubby's Birthday */
+.hubby-birthday.is-birthday::after,
+.hubby-birthday.is-birthday::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: gold;
+    border-radius: 50%;
+    box-shadow: 0 0 10px gold, 0 0 20px gold;
+    animation: fireworks 1.5s infinite;
+}
+
+.hubby-birthday.is-birthday::before {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0.5s;
+}
+
+.hubby-birthday.is-birthday::after {
+    top: 30%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+@keyframes fireworks {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(5); opacity: 0; }
+}
+
+.subsection-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin: 40px 0 20px 0;
+    color: #483d8b;
+}
+
 /* --- Bucket List Section --- */
 .bucket-list-section {
-    padding: 60px 20px;
     background-color: #fff;
     color: #333;
     text-align: center;
@@ -631,7 +787,6 @@ body, html {
 
 /* --- NEW: Future Dreams Section --- */
 .dreams-section {
-    padding: 60px 20px;
     background-color: #f3e5f5; /* Soft Lavender */
     color: #333;
     text-align: center;
@@ -675,7 +830,6 @@ body, html {
 
 /* --- NEW: Birthday Vibes Section --- */
 .birthday-vibes-section {
-    padding: 60px 20px;
     background-color: #fff;
     text-align: center;
 }
@@ -717,7 +871,6 @@ body, html {
 
 /* --- NEW: Our Lessons Section --- */
 .lessons-section {
-    padding: 60px 20px;
     background-color: #fff;
     color: #333;
     text-align: center;
@@ -751,7 +904,6 @@ body, html {
 
 /* --- NEW: Promises Section --- */
 .promises-section {
-    padding: 60px 20px;
     background-color: #483D8B; /* Dark Slate Blue background */
     color: #fff;
     text-align: center;
@@ -787,7 +939,6 @@ body, html {
 
 /* --- NEW: Future Letter Section --- */
 .future-letter-section {
-    padding: 60px 20px;
     background-color: #fff;
     color: #333;
     text-align: center;
@@ -824,7 +975,6 @@ body, html {
 
 /* --- NEW: "Why I Love You" Section --- */
 .reasons-section {
-    padding: 60px 20px;
     background-color: #f3e5f5; /* Soft Lavender */
     text-align: center;
 }
@@ -863,7 +1013,6 @@ body, html {
 
 /* --- NEW: Secret Trigger Section --- */
 .secret-trigger-section {
-    padding: 20px;
     background-color: #fff;
     text-align: center;
 }
@@ -931,7 +1080,6 @@ body, html {
 
 /* --- NEW: Journal Trigger Section --- */
 .journal-trigger-section {
-    padding: 40px 20px;
     background-color: #f3e5f5;
     text-align: center;
 }
@@ -1004,7 +1152,6 @@ body, html {
 
 /* --- NEW: Letter Trigger Section --- */
 .letter-trigger-section {
-    padding: 40px 20px;
     background-color: #f3e5f5;
     text-align: center;
 }
