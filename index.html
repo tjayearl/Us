@@ -1,98 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tjay & Ines</title>
-    <!-- Add your custom favicon here -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tjay ❤️ Ines</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <nav id="main-nav" class="main-nav">
-        <ul>
-            <li><a href="#our-story">Our Story</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#love-notes">Notes</a></li>
-            <li><a href="#bucket-list">Our List</a></li>
-        </ul>
-    </nav>
+<body class="light-mode">
+  <!-- Floating Hearts Container -->
+  <div id="hearts-container" aria-hidden="true"></div>
 
-    <header class="hero-section">
-        <div class="hearts-container"></div>
-        <h1 class="hero-headline">Tjay &amp; Ines</h1>
-        <p class="hero-tagline">From high school sweethearts to forever partners.</p>
-    </header>
+  <!-- Background Music -->
+  <audio id="bg-music" src="media/background.mp3" loop></audio>
 
-    <!-- NEW: Wavy Divider -->
-    <div class="section-divider">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="#home">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#countdown">Countdowns</a>
+        <a href="#future-goals">Goals</a>
+        <a href="#secret-messages">Secret</a>
+      </div>
+
+      <!-- Theme Toggle sits in nav but is visually fixed top-right -->
+      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌗</button>
     </div>
+  </nav>
 
-    <section id="our-story" class="story-section page-section">
-        <div class="container">
-            <h2>Our Story</h2>
-            <div class="timeline">
-                <!-- NEW Timeline Items -->
-                <div class="timeline-item">
-                    <div class="timeline-icon">👀</div>
-                    <div class="timeline-content">
-                        <h3>First Glance</h3>
-                        <p>The first time our paths crossed, when I came to visit the school. A moment that set everything in motion.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🏫</div>
-                    <div class="timeline-content">
-                        <h3>First Day of Class</h3>
-                        <p>Our story truly began here, sitting just seats apart, with no idea what the future held for us.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">❤️</div>
-                    <div class="timeline-content">
-                        <h3>The First Saturday</h3>
-                        <p>The day it all became official. The start of walking to school together and sharing every moment.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🎓</div>
-                    <div class="timeline-content">
-                        <h3>Finishing High School</h3>
-                        <p>We closed one chapter together, ready to face the world, side-by-side.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-content">
-                        <h3>Learning and Growing</h3>
-                        <p>Life took us on different paths. We faced breakups and learned tough lessons, but those experiences helped shape who we are today.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">💌</div>
-                    <div class="timeline-content">
-                        <h3>Back Together - September 1st</h3>
-                        <p>Fate, and a little bit of courage, brought us back to each other. This time, for good.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- HOME SECTION -->
+  <main>
+    <section id="home" class="section fade-in">
+      <h1>Tjay ❤️ Ines</h1>
+      <p>Welcome to our forever website.</p>
     </section>
 
-    <!-- NEW: Wavy Divider -->
-    <div class="section-divider flipped">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
-    </div>
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="section fade-in">
+      <h2>Our Gallery</h2>
+      <div class="gallery-grid">
+        <img src="images/My_love-17.jpeg" alt="Memory 1" />
+        <img src="images/My_love-20.jpeg" alt="Memory 2" />
+        <video controls>
+          <source src="Media/My_love-vid.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
 
-    <!-- NEW: Memory Wall Section -->
-    <section id="memory-wall" class="memory-wall-section">
-    </script>
+    <!-- COUNTDOWN SECTION -->
+    <section id="countdown" class="section fade-in">
+      <h2>Countdowns</h2>
+      <p>Anniversary: <span id="anniversary-countdown"></span></p>
+      <p>Her Birthday: <span id="her-bday-countdown"></span></p>
+      <p>My Birthday: <span id="my-bday-countdown"></span></p>
+    </section>
+
+    <!-- FUTURE GOALS -->
+    <section id="future-goals" class="section fade-in">
+      <h2>Our Future Goals</h2>
+      <ul id="goals-list">
+        <li>Travel to Paris 🗼</li>
+        <li>Buy our dream home 🏡</li>
+        <li>Get married 💍</li>
+      </ul>
+    </section>
+
+    <!-- SECRET MESSAGES -->
+    <section id="secret-messages" class="section fade-in">
+      <h2>Secret Messages</h2>
+      <input type="password" id="secret-password" placeholder="Enter password" />
+      <button id="unlock-btn">Unlock</button>
+      <button id="lock-btn" style="display:none;">Lock</button>
+      <div id="secret-content" style="display:none;">
+        <p>I love you more every single day ❤️</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- MD5 library (only if you are using hashed password logic) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
