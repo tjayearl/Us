@@ -27,27 +27,103 @@ themeToggle.addEventListener("click", () => {
 /* ---------------------------
    COUNTDOWNS
    --------------------------- */
-function updateCountdowns() {
-  const today = new Date();
-  const anniversary = new Date(today.getFullYear(), 8, 1); // Sept 1
-  const herBday    = new Date(today.getFullYear(), 7, 31); // Aug 31
-  const myBday     = new Date(today.getFullYear(), 8, 5);  // Sept 5
+const countdownContainer = document.getElementById('countdown-container');
 
-  function daysLeft(target) {
-    // if the target already passed this year, use next year
-    if (target.setHours(0,0,0,0) < today.setHours(0,0,0,0)) {
-      target.setFullYear(new Date().getFullYear() + 1);
-    }
-    const diff = target - new Date();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
-  }
+// Use full date strings for accuracy
+const events = [
+  { name: "Her Birthday", date: "2025-08-31T00:00:00", icon: "🎂" },
+  { name: "Anniversary", date: "2025-09-01T00:00:00", icon: "❤️" },
+  { name: "My Birthday", date: "2025-09-05T00:00:00", icon: "🎉" }
+];
 
-  document.getElementById("anniversary-countdown").textContent = daysLeft(new Date(anniversary)) + " days left";
-  document.getElementById("her-bday-countdown").textContent = daysLeft(new Date(herBday)) + " days left";
-  document.getElementById("my-bday-countdown").textContent = daysLeft(new Date(myBday)) + " days left";
+// Create the HTML structure for each countdown
+function setupCountdowns() {
+  if (!countdownContainer) return;
+  countdownContainer.innerHTML = ''; // Clear previous content
+  events.forEach((event, index) => {
+    const element = document.createElement('div');
+    element.className = 'countdown-item';
+    element.innerHTML = `
+      <h3>${event.name} ${event.icon}</h3>
+      <div class="timer" id="timer-${index}"></div>
+    `;
+    countdownContainer.appendChild(element);
+  });
 }
-updateCountdowns();
-setInterval(updateCountdowns, 1000 * 60 * 60); // update hourly
+
+function celebrate() {
+  // Create a burst of hearts when a countdown finishes
+  for (let i = 0; i < 20; i++) {
+    setTimeout(createHeart, i * 100);
+  }
+}
+
+function updateAllCountdowns() {
+  events.forEach((event, index) => {
+    const now = new Date();
+    let targetDate = new Date(event.date);
+
+    // If the date has already passed this year, set it for next year
+    if (targetDate < now) {
+      targetDate.setFullYear(targetDate.getFullYear() + 1);
+    }
+
+    const diff = targetDate - now;
+
+    // If the event is happening now, display a message
+    if (diff <= 0 && diff > -1000 * 60 * 60 * 24) { // Within 24 hours after start
+      const timerEl = document.getElementById(`timer-${index}`);
+      if (timerEl && !timerEl.textContent.includes("Today")) {
+        timerEl.textContent = `It's today! ${event.icon}`;
+        celebrate();
+      }
+      // If it's already showing the message, just return.
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    const format = (num) => String(num).padStart(2, '0');
+
+    const timerEl = document.getElementById(`timer-${index}`);
+    if (timerEl) {
+      timerEl.innerHTML = `<span>${days}</span>d <span>${format(hours)}</span>h <span>${format(minutes)}</span>m <span>${format(seconds)}</span>s`;
+    }
+  });
+
+  // After updating all, find and highlight the closest one
+  highlightClosestEvent();
+}
+
+function highlightClosestEvent() {
+  const now = new Date();
+  let closestEventIndex = -1;
+  let minDiff = Infinity;
+
+  events.forEach((event, index) => {
+    let targetDate = new Date(event.date);
+    if (targetDate < now) targetDate.setFullYear(targetDate.getFullYear() + 1);
+    const diff = targetDate - now;
+    if (diff > 0 && diff < minDiff) {
+      minDiff = diff;
+      closestEventIndex = index;
+    }
+  });
+
+  document.querySelectorAll('.countdown-item').forEach((item, index) => {
+    item.classList.toggle('closest-event', index === closestEventIndex);
+  });
+}
+
+// Initial setup and start the interval
+if (countdownContainer) {
+  setupCountdowns();
+  updateAllCountdowns();
+  setInterval(updateAllCountdowns, 1000);
+}
 
 /* ---------------------------
    SECRET MESSAGES (example with hash)
