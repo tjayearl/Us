@@ -40,8 +40,16 @@
     <section id="gallery" class="section fade-in">
       <h2>Our Gallery</h2>
       <div class="gallery-grid">
-        <img src="images/My_love-17.jpeg" alt="Memory 1" />
-        <img src="images/My_love-20.jpeg" alt="Memory 2" />
+        <img src="images/My_love-17-small.jpeg" 
+             srcset="images/My_love-17-small.jpeg 600w, images/My_love-17.jpeg 1024w"
+             sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 220px"
+             alt="A loving memory between Tjay and Ines" />
+
+        <img src="images/My_love-20-small.jpeg" 
+             srcset="images/My_love-20-small.jpeg 600w, images/My_love-20.jpeg 1024w"
+             sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 220px"
+             alt="Another cherished moment" />
+
         <video controls>
           <source src="Media/My_love-vid.mp4" type="video/mp4" />
         </video>
