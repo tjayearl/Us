@@ -1,28 +1,31 @@
 /* ---------------------------
    THEME TOGGLE
    --------------------------- */
-const body = document.body;
 const themeToggle = document.getElementById("theme-toggle");
 
-// Initialize theme from stored preference (optional)
-if (localStorage.getItem("theme") === "dark") {
-  body.classList.remove("light-mode");
-  body.classList.add("dark-mode");
-  themeToggle.setAttribute("aria-pressed", "true");
-} else {
-  body.classList.remove("dark-mode");
-  body.classList.add("light-mode");
-  themeToggle.setAttribute("aria-pressed", "false");
-}
+// Only run theme logic if the toggle button exists on the page
+if (themeToggle) {
+  const body = document.body;
 
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("light-mode");
-  body.classList.toggle("dark-mode");
-  const isDark = body.classList.contains("dark-mode");
-  themeToggle.setAttribute("aria-pressed", String(isDark));
-  // persist
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
+  // Initialize theme from stored preference
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.remove("light-mode");
+    body.classList.add("dark-mode");
+    themeToggle.setAttribute("aria-pressed", "true");
+  } else {
+    body.classList.remove("dark-mode");
+    body.classList.add("light-mode");
+    themeToggle.setAttribute("aria-pressed", "false");
+  }
+
+  themeToggle.addEventListener("click", () => {
+    body.classList.toggle("light-mode");
+    body.classList.toggle("dark-mode");
+    const isDark = body.classList.contains("dark-mode");
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+}
 
 /* ---------------------------
    COUNTDOWNS
@@ -125,37 +128,72 @@ if (countdownContainer) {
   setInterval(updateAllCountdowns, 1000);
 }
 
+/* Function to navigate home, used by secret.html */
+function goHome() {
+  window.location.href = 'index.html';
+}
+
 /* ---------------------------
    SECRET MESSAGES (example with hash)
    --------------------------- */
-const unlockBtn = document.getElementById("unlock-btn");
-const lockBtn = document.getElementById("lock-btn");
-const secretContent = document.getElementById("secret-content");
-const secretInput = document.getElementById("secret-password");
+if (document.getElementById('passwordInput')) {
+  const secretPassword = "Foreverandforalways";
+  let wrongAttempts = 0;
 
-// MD5 hash of "Foreverandforalways" (if using md5)
-const correctHash = "fe8768bf842b5559ff0e69092c4bd865";
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    if (input === secretPassword) {
+      document.getElementById("secretMessage").style.display = "block";
+      document.getElementById("passwordSection").style.display = "none";
+  
+      createHearts();
+  
+      let audio = new Audio("media/romantic-song.mp3"); // Assuming music is in a 'media' folder like your other audio
+      audio.volume = 0.5;
+      audio.play();
 
-function unlockMessages() {
-  const password = document.getElementById("secret-password").value.trim();
-
-  try {
-    if (md5(password) === correctHash) {
-      document.getElementById("secret-content").style.display = "block";
-      localStorage.setItem("unlocked", "true");
+      wrongAttempts = 0; // reset attempts when correct
     } else {
-      alert("Wrong password!");
+      wrongAttempts++;
+  
+      if (wrongAttempts >= 3) {
+        showCuteMessage();
+        wrongAttempts = 0; // reset attempts after showing message
+      } else {
+        alert("Hmm… do you remember? 😉 Try again!");
+      }
     }
-  } catch (e) {
-    console.error("MD5 function is not working. Check if md5.min.js is loaded correctly.");
-    alert("There was an error verifying the password.");
   }
-}
-unlockBtn.addEventListener("click", unlockMessages);
 
-// Auto-unlock if previously unlocked
-if (localStorage.getItem("unlocked") === "true") {
-  document.getElementById("secret-content").style.display = "block";
+  function showCuteMessage() {
+    // Create a full-screen overlay with a cute message
+    const overlay = document.createElement("div");
+    overlay.classList.add("cute-message");
+    overlay.innerHTML = `
+      <div class="message-box">
+        <h2>Babe... 😘</h2>
+        <p>You’re forgetting our special phrase ❤️</p>
+        <button onclick="closeCuteMessage()">Let me try again</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+  }
+  
+  function closeCuteMessage() {
+    document.querySelector(".cute-message").remove();
+  }
+
+  function createHearts() {
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+  }
 }
 
 /* ---------------------------

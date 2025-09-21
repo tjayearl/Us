@@ -352,3 +352,146 @@ body.dark-mode .goal-card {
   nav .nav-left { gap: 10px; font-size: 14px; }
   #theme-toggle { top: 10px; right: 8px; padding: 6px 8px; }
 }
+
+/* SECRET SECTION STYLES (for Fun & Animations) */
+.secret-section {
+  text-align: center;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  max-width: 400px;
+}
+
+.secret-section input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 12px;
+  border: 2px solid #aaa;
+  text-align: center;
+}
+
+.secret-section button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background-color: #d16ba5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.secret-section button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* 🎨 style.css (Secret Page Look) */
+body.secret-page {
+  background: linear-gradient(to bottom, #3a0ca3, #5f0f40, #000000);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  /* font-family: 'Dancing Script', cursive;  -- Note: This font needs to be imported to work. */
+}
+
+body.secret-page #passwordSection {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: 100px auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+body.secret-page #secretMessage {
+  margin-top: 2rem;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes floatHearts {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* Heart animation for secret page */
+.secret-page .heart {
+  position: fixed;
+  top: -1vh;
+  font-size: 2rem;
+  animation: floatHearts 5s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(105vh); }
+}
+
+/* Cute Message Overlay for Secret Page */
+.cute-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000; /* Ensure it's on top */
+}
+
+.message-box {
+  background: #5f0f40; /* Match the secret page theme */
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.message-box button {
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+/* Back to Home button on Secret Page */
+.back-home {
+  margin-top: 1rem;
+  background: #6a5acd; /* purple tone */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-home:hover {
+  background: #483d8b;
+  transform: scale(1.05);
+}
