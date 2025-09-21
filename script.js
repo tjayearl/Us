@@ -212,12 +212,12 @@ let goals = JSON.parse(localStorage.getItem('goals')) || [
   },
   {
     title: "Get Married 💍",
-    description: "Tying the knot and celebrating our love with family and friends. Na sio watu walikuwa wanakudai",
+    description: "Tying the knot and celebrating our love with family and friends.Na sio watu walikuwa wanakudai",
     status: "Dreaming 💭"
   },
   {
     title: "Buy Our First Car 🚗",
-    description: "For all our future road trips and adventures. Lazima ka aventure!",
+    description: "For all our future road trips and adventures.Lazima ka aventure!",
     status: "Dreaming 💭"
   }
 ];

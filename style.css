@@ -315,6 +315,34 @@ body.dark-mode .goal-card {
   transform: scale(1.05);
 }
 
+/* VIDEO SECTION STYLING */
+.videos {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  margin-top: 1rem;
+}
+
+video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+video:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+}
+
 /* FADE-IN */
 .fade-in {
   opacity: 0;
