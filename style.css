@@ -86,8 +86,8 @@ nav a:hover { text-decoration: underline; }
   display: none; /* Hidden on desktop */
   flex-direction: column;
   gap: 5px;
-  cursor: pointer;
-  z-index: 1500; /* Above nav content */
+  cursor: pointer; 
+  z-index: 2100; /* Must be above the nav menu and theme toggle */
 }
 .hamburger span {
   width: 25px;
@@ -572,22 +572,22 @@ video {
     display: flex;
   }
   .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start off-screen */
-    width: 70%;
-    max-width: 280px;
-    height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+    position: absolute;
+    top: 64px; /* Position below the nav bar */
+    right: 0;
+    width: 250px;
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
-    transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    transform: translateY(-150%); /* Start hidden above */
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .nav-links.active {
-    right: 0; /* Slide in */
+    transform: translateY(0); /* Slide down into view */
   }
   .nav-links a {
     font-size: 1.5rem;
