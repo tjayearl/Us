@@ -170,7 +170,7 @@ let goals = JSON.parse(localStorage.getItem('goals')) || [
   {
     title: "Move In Together 🏡",
     description: "Starting our new chapter in a place we can call our own.",
-    status: "Can be: Dreaming 💭"
+    status: "Dreaming 💭"
   },
   {
     title: "Get Married 💍",
