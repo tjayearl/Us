@@ -63,10 +63,15 @@ nav .nav-inner {
   justify-content: space-between;
   padding: 12px 20px;
 }
-nav .nav-left {
+nav .nav-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+nav .nav-links {
   display: flex;
   gap: 18px;
 }
+
 nav a {
   text-decoration: none;
   color: var(--text-color);
@@ -75,6 +80,22 @@ nav a {
   border-radius: 8px;
 }
 nav a:hover { text-decoration: underline; }
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none; /* Hidden on desktop */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1500; /* Above nav content */
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
 /* THEME TOGGLE (fixed visual, always top-right, above everything) */
 #theme-toggle {
@@ -441,9 +462,8 @@ body.dark-mode .goal-card {
 /* GALLERY GRID */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* responsive grid */
-  gap: 20px;
-  padding: 20px;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   justify-items: center;
 }
 
@@ -451,18 +471,18 @@ body.dark-mode .goal-card {
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery-grid a:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
 .gallery-grid img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
 }
@@ -481,18 +501,29 @@ body.dark-mode .goal-card {
   margin-top: 1rem;
 }
 
-video {
-  width: 100%;
-  max-width: 400px;
+/* Video Wrapper for Aspect Ratio */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-video:hover {
+.video-wrapper:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 /* FADE-IN */
@@ -535,7 +566,44 @@ video:hover {
 /* small responsive tweaks */
 @media (max-width: 640px) {
   body { padding-top: 72px; } /* Adjust for potentially taller nav */
-  nav .nav-left { gap: 10px; font-size: 14px; } /* Reduce nav spacing */
+  
+  /* Hamburger Menu Logic */
+  .hamburger {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 70%;
+    max-width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .nav-links.active {
+    right: 0; /* Slide in */
+  }
+  .nav-links a {
+    font-size: 1.5rem;
+  }
+
+  /* Hamburger 'X' animation */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
   .hero-section { height: calc(100vh - 72px); margin-top: -72px; }
   .hero-section h1 { font-size: 2.8rem; }
   .hero-section p { font-size: 1.2rem; }
