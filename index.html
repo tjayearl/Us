@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tjay ❤️ Ines</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Lightbox2 CSS from CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
 </head>
 <body class="light-mode">
   <!-- Floating Hearts Container -->
@@ -40,15 +42,14 @@
     <section id="gallery" class="section fade-in">
       <h2>Our Gallery</h2>
       <div class="gallery-grid">
-        <img src="images/My_love-17-small.jpeg" 
-             srcset="images/My_love-17-small.jpeg 600w, images/My_love-17.jpeg 1024w"
-             sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 220px"
-             alt="A loving memory between Tjay and Ines" />
-
-        <img src="images/My_love-20-small.jpeg" 
-             srcset="images/My_love-20-small.jpeg 600w, images/My_love-20.jpeg 1024w"
-             sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 220px"
-             alt="Another cherished moment" />
+        <!-- Image 1 with Lightbox -->
+        <a href="images/My_love-17.jpeg" data-lightbox="us-gallery" data-title="A loving memory between Tjay and Ines">
+          <img src="images/My_love-17.jpeg" alt="A loving memory between Tjay and Ines" />
+        </a>
+        <!-- Image 2 with Lightbox -->
+        <a href="images/My_love-20.jpeg" data-lightbox="us-gallery" data-title="Another cherished moment">
+          <img src="images/My_love-20.jpeg" alt="Another cherished moment" />
+        </a>
 
         <video controls>
           <source src="Media/My_love-vid.mp4" type="video/mp4" />
@@ -75,6 +76,8 @@
 
   <!-- MD5 library (only if you are using hashed password logic) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+  <!-- Lightbox2 JS from CDN (includes jQuery) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
