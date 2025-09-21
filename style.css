@@ -103,6 +103,32 @@ main { max-width: 1100px; margin: 0 auto; }
   min-height: 40vh;
 }
 
+/* FUTURE GOALS SECTION STYLING */
+#future-goals {
+  padding: 56px 0; /* Remove horizontal padding to allow full-width background */
+}
+
+/* Light mode: purple gradient background */
+body.light-mode #future-goals {
+  background: linear-gradient(160deg, rgba(192, 132, 252, 0.4), rgba(245, 225, 255, 0.2) 70%);
+}
+
+#future-goals .goals-grid {
+  padding: 0 20px; /* Add padding to the grid container instead */
+}
+
+/* GOALS PROGRESS TRACKER */
+#goals-progress-tracker {
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
 /* MULTI-COUNTDOWN STYLES */
 .countdown-list {
   display: flex;
@@ -171,6 +197,104 @@ body.dark-mode .countdown-item .timer {
   color: #e0e7ff;
   text-shadow: 0 0 8px rgba(165, 180, 252, 0.4), 0 0 20px rgba(129, 140, 248, 0.3);
 }
+
+/* GOAL CARDS */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.goal-card {
+  position: relative;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+/* Light Mode: White cards */
+body.light-mode .goal-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+}
+
+/* Dark Mode: Glowing purple borders */
+body.dark-mode .goal-card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid #c084fc;
+  box-shadow: 0 0 20px -5px #c084fc;
+}
+
+.goal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.goal-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.goal-card p {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+.goal-status {
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+/* Status-specific styles */
+.goal-card.status-dreaming .goal-status { background: rgba(143, 201, 255, 0.3); } /* Light Blue */
+.goal-card.status-planning .goal-status { background: rgba(255, 224, 130, 0.4); } /* Light Yellow */
+.goal-card.status-in .goal-status { background: rgba(178, 140, 255, 0.4); } /* Light Purple */
+.goal-card.status-achieved { border-color: #4ade80; }
+.goal-card.status-achieved .goal-status { background: rgba(74, 222, 128, 0.4); color: #f0fdf4; } /* Green */
+
+/* Achieved Animation */
+.goal-card.status-achieved {
+  animation: achieved-glow 2s ease-in-out;
+}
+
+.goal-card .confetti {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 3rem;
+  animation: confetti-pop 0.6s 0.2s ease-out backwards;
+}
+
+@keyframes achieved-glow {
+  0%, 100% { box-shadow: 0 0 15px -5px transparent; }
+  50% { box-shadow: 0 0 30px -2px #4ade80; }
+}
+
+@keyframes confetti-pop {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  60% { transform: scale(1.2) rotate(-15deg); opacity: 1; }
+  100% { transform: scale(1) rotate(5deg); opacity: 1; }
+}
+
+/* MOTIVATIONAL QUOTE */
+.quote-container {
+  margin-top: 40px;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.quote-container.visible {
+  opacity: 0.8;
+}
+
 
 /* Gallery Grid */
 .gallery-grid {

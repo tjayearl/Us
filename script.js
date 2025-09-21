@@ -31,7 +31,7 @@ const countdownContainer = document.getElementById('countdown-container');
 
 // Use full date strings for accuracy
 const events = [
-  { name: "Her Birthday", date: "2025-08-31T00:00:00", icon: "🎂" },
+  { name: "Your Birthday", date: "2025-08-31T00:00:00", icon: "🎂" },
   { name: "Anniversary", date: "2025-09-01T00:00:00", icon: "❤️" },
   { name: "My Birthday", date: "2025-09-05T00:00:00", icon: "🎉" }
 ];
@@ -156,6 +156,154 @@ unlockBtn.addEventListener("click", unlockMessages);
 // Auto-unlock if previously unlocked
 if (localStorage.getItem("unlocked") === "true") {
   document.getElementById("secret-content").style.display = "block";
+}
+
+/* ---------------------------
+   INTERACTIVE GOAL CARDS
+   --------------------------- */
+let goals = JSON.parse(localStorage.getItem('goals')) || [
+  {
+    title: "Travel The World ✈️",
+    description: "Exploring new cultures and creating memories together.",
+    status: "Dreaming 💭" // Can be: Dreaming 💭, Planning 📝, In Progress 🔄, Achieved ✅
+  },
+  {
+    title: "Move In Together 🏡",
+    description: "Starting our new chapter in a place we can call our own.",
+    status: "Can be: Dreaming 💭"
+  },
+  {
+    title: "Get Married 💍",
+    description: "Tying the knot and celebrating our love with family and friends. Na sio watu walikuwa wanakudai",
+    status: "Dreaming 💭"
+  },
+  {
+    title: "Buy Our First Car 🚗",
+    description: "For all our future road trips and adventures. Lazima ka aventure!",
+    status: "Dreaming 💭"
+  }
+];
+
+const goalsContainer = document.getElementById('goals-container');
+
+function saveGoals() {
+  localStorage.setItem('goals', JSON.stringify(goals));
+}
+
+function updateGoalsProgress() {
+  const achievedCount = goals.filter(goal => goal.status.includes('Achieved')).length;
+  const totalGoals = goals.length;
+  const progressTracker = document.getElementById('goals-progress-tracker');
+  if (progressTracker) {
+    progressTracker.innerHTML = `<span>${achievedCount}/${totalGoals} Achieved 🎯</span>`;
+  }
+}
+
+function renderGoals() {
+  if (!goalsContainer) return;
+  goalsContainer.innerHTML = ''; // Clear existing goals
+
+  goals.forEach((goal, index) => {
+    const card = document.createElement('div');
+    card.className = 'goal-card';
+    card.draggable = true;
+    card.dataset.index = index;
+    // Add a class based on status for styling
+    const statusClass = goal.status.split(' ')[0].toLowerCase();
+    card.classList.add(`status-${statusClass}`);
+
+    card.innerHTML = `
+      <div class="goal-card-content">
+        <h3>${goal.title}</h3>
+        <p>${goal.description}</p>
+        <div class="goal-status">${goal.status}</div>
+      </div>
+    `;
+
+    // Add confetti for achieved goals
+    if (goal.status.includes('Achieved')) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.innerHTML = '🎉';
+      card.appendChild(confetti);
+    }
+
+    goalsContainer.appendChild(card);
+  });
+
+  updateGoalsProgress();
+}
+
+// Initial render on page load
+if (goalsContainer) {
+  // --- Drag and Drop Logic ---
+  let dragStartIndex;
+
+  function dragStart() {
+    dragStartIndex = +this.dataset.index;
+  }
+
+  function dragOver(e) {
+    e.preventDefault(); // Necessary to allow drop
+  }
+
+  function drop() {
+    const dragEndIndex = +this.dataset.index;
+    swapGoals(dragStartIndex, dragEndIndex);
+    this.classList.remove('over');
+  }
+
+  function swapGoals(fromIndex, toIndex) {
+    const itemOne = goals[fromIndex];
+    const itemTwo = goals[toIndex];
+
+    goals[fromIndex] = itemTwo;
+    goals[toIndex] = itemOne;
+
+    saveGoals();
+    renderGoals();
+  }
+
+  function addDragListeners() {
+    const draggables = document.querySelectorAll('.goal-card');
+    draggables.forEach(draggable => {
+      draggable.addEventListener('dragstart', dragStart);
+      draggable.addEventListener('dragover', dragOver);
+      draggable.addEventListener('drop', drop);
+    });
+  }
+
+  renderGoals();
+  addDragListeners();
+}
+
+/* ---------------------------
+   MOTIVATIONAL QUOTES
+   --------------------------- */
+const quotes = [
+  "The future belongs to those who believe in the beauty of their dreams.",
+  "Together is a beautiful place to be.",
+  "A journey of a thousand miles begins with a single step.",
+  "The best is yet to come.",
+  "Let's build a life we love."
+];
+
+const quoteContainer = document.getElementById('motivational-quote');
+let currentQuoteIndex = 0;
+
+function showNextQuote() {
+  if (!quoteContainer) return;
+  quoteContainer.classList.remove('visible');
+  setTimeout(() => {
+    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    quoteContainer.textContent = `"${quotes[currentQuoteIndex]}"`;
+    quoteContainer.classList.add('visible');
+  }, 500); // Wait for fade-out transition
+}
+
+if (quoteContainer) {
+  showNextQuote(); // Initial quote
+  setInterval(showNextQuote, 7000); // Change quote every 7 seconds
 }
 
 /* ---------------------------
