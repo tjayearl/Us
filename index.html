@@ -124,13 +124,27 @@
     <!-- VIDEO SECTION -->
     <section id="videos" class="section fade-in">
       <h2>Our Videos</h2>
+      <!-- Filter Buttons -->
+      <div class="video-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="memories">Memories</button>
+        <button class="filter-btn" data-filter="adventures">Adventures</button>
+      </div>
       <div class="video-grid">
-        <div class="video-wrapper">
-          <video controls poster="images/Vibes.jpg">
-            <source src="Media/My_love-vid-fixed.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+        <!-- Video Item 1 -->
+        <div class="video-item" data-category="memories">
+          <a href="Media/My_love-vid.mp4" data-lightbox="videos" data-title="Our Special Moments" class="video-thumbnail">
+            <img src="images/Vibes.jpg" alt="Video Thumbnail" loading="lazy">
+            <div class="play-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+            </div>
+          </a>
+          <div class="video-info">
+            <h3>Our Special Moments</h3>
+            <p>A collection of our favorite memories together.</p>
+          </div>
         </div>
+        <!-- Add more .video-item divs here with different data-category -->
       </div>
     </section>
 

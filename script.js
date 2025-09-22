@@ -443,6 +443,34 @@ document.addEventListener("visibilitychange", () => {
 startHearts();
 
 /* ---------------------------
+   VIDEO FILTERING
+   --------------------------- */
+const filterButtons = document.querySelectorAll('.filter-btn');
+const videoItems = document.querySelectorAll('.video-item');
+
+if (filterButtons.length > 0 && videoItems.length > 0) {
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filter = button.dataset.filter;
+
+      videoItems.forEach(item => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.style.display = 'block';
+          // You can add a fade-in animation class here if you like
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+
+/* ---------------------------
    Small UX: start music on user gesture (autoplay often blocked)
    --------------------------- */
 const bgMusic = document.getElementById("bg-music");
